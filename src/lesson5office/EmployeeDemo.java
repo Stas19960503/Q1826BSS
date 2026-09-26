@@ -3,7 +3,6 @@ package lesson5office;
 public class EmployeeDemo {
     public static void main(String[] args) {
 
-        // ==================== СОЗДАЁМ РАБОТНИКОВ ====================
         Worker worker1 = new Worker("Иван", "Петров", 5);
         worker1.setPosition(Position.WORKER);
 
@@ -13,7 +12,6 @@ public class EmployeeDemo {
         Worker worker3 = new Worker("Алексей", "Кузнецов", 8);
         worker3.setPosition(Position.WORKER);
 
-        // ==================== СОЗДАЁМ ДИРЕКТОРОВ ====================
         Director mainDirector = new Director("Ольга", "Смирнова", 12);
         mainDirector.setPosition(Position.DIRECTOR);
 
