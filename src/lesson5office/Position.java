@@ -1,4 +1,4 @@
-package lesson5ofis;
+package lesson5office;
 
 public enum Position {
     DIRECTOR(2.0),

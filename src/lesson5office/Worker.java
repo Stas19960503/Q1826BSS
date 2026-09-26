@@ -1,4 +1,4 @@
-package lesson5ofis;
+package lesson5office;
 
 public class Worker extends Employee {
 

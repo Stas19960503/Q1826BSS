@@ -1,4 +1,4 @@
-package lesson5ofis;
+package lesson5office;
 
 public class PersonDemo {
     public static void main(String[] args) {

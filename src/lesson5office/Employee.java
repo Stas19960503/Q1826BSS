@@ -1,4 +1,4 @@
-package lesson5ofis;
+package lesson5office;
 
 public abstract class Employee extends Person {
 
