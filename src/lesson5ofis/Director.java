@@ -1,11 +1,10 @@
 package lesson5ofis;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Director extends Employee {
 
-    private final List<Employee> subordinates = new ArrayList<>();
+    private final Employee[] subordinates = new Employee[100];
+
+    private int count = 0;
 
     public Director(String firstName, String lastName, int experience) {
         super(firstName, lastName, experience);
@@ -21,16 +20,28 @@ public class Director extends Employee {
     }
 
     public void addWorker(Employee employee) {
-        if (employee != null) {
-            subordinates.add(employee);
+        if (employee == null) {
+            System.out.println("Ошибка: нельзя добавить null вместо сотрудника!");
+            return;
         }
+
+        if (count >= subordinates.length) {
+            System.out.println("Ошибка: массив подчинённых заполнен!");
+            return;
+        }
+
+        subordinates[count] = employee;
+        count++;
+
+        System.out.println(employee.getFullName() + " добавлен(а) под управление директора "
+                + this.getFullName() + ". Всего подчинённых: " + count);
     }
 
     @Override
     public double calculateSalary() {
         if (position == null) return 0;
         double baseSalary = BASE_RATE * position.getCoefficient() * (1 + experience * 0.1);
-        double bonusForWorkers = 1 + subordinates.size() * 0.05;
+        double bonusForWorkers = 1 + count * 0.05;  // используем count, а не subordinates.length
         return baseSalary * bonusForWorkers;
     }
 
@@ -45,17 +56,15 @@ public class Director extends Employee {
         sb.append("Должность: ").append(position).append("\n");
         sb.append("Стаж: ").append(experience).append(" лет\n");
         sb.append("Зарплата: ").append(calculateSalary()).append(" руб.\n");
-        sb.append("Количество подчинённых: ").append(subordinates.size()).append("\n");
+        sb.append("Количество подчинённых: ").append(count).append("\n");
 
-        if (subordinates.isEmpty()) {
+        if (count == 0) {
             sb.append("\nПодчинённых нет.\n");
         } else {
             sb.append("\n--- СВЕДЕНИЯ О ПОДЧИНЁННЫХ ---\n");
-            int i = 1;
-            for (Employee emp : subordinates) {
-                sb.append("\nПодчинённый #").append(i).append(":\n");
-                sb.append("  ").append(emp.toString()).append("\n");
-                i++;
+            for (int i = 0; i < count; i++) {
+                sb.append("\nПодчинённый #").append(i + 1).append(":\n");
+                sb.append("  ").append(subordinates[i].toString()).append("\n");
             }
         }
 
@@ -63,7 +72,11 @@ public class Director extends Employee {
         return sb.toString();
     }
 
-    public List<Employee> getSubordinates() {
+    public Employee[] getSubordinates() {
         return subordinates;
+    }
+
+    public int getCount() {
+        return count;
     }
 }
