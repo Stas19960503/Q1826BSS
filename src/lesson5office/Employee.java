@@ -14,15 +14,17 @@ public abstract class Employee extends Person {
 
     public abstract void setPosition(Position position);
 
+    public void addWorker(Employee employee) {
+        System.out.println(getFullName() + " не может иметь подчинённых!");
+    }
+
     public double calculateSalary() {
-        if (position == null) {
-            return 0;
-        }
+        if (position == null) return 0;
         return BASE_RATE * position.getCoefficient() * (1 + experience * 0.1);
     }
 
     public void printInfo() {
-        System.out.println("Имя: " + getFullName());  // getFullName() из Person
+        System.out.println("Имя: " + getFullName());
         System.out.println("Должность: " + position);
         System.out.println("Коэффициент: " + position.getCoefficient());
         System.out.println("Стаж: " + experience + " лет");

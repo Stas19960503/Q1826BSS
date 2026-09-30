@@ -3,11 +3,11 @@ package lesson5office;
 public class Director extends Employee {
 
     private final Employee[] subordinates = new Employee[100];
-
     private int count = 0;
 
     public Director(String firstName, String lastName, int experience) {
         super(firstName, lastName, experience);
+        setPosition(Position.DIRECTOR);
     }
 
     @Override
@@ -24,15 +24,23 @@ public class Director extends Employee {
             System.out.println("Ошибка: нельзя добавить null вместо сотрудника!");
             return;
         }
-
+        if (employee == this) {
+            System.out.println("Ошибка: директор не может быть подчинённым самому себе!");
+            return;
+        }
+        for (int i = 0; i < count; i++) {
+            if (subordinates[i] == employee) {
+                System.out.println("Ошибка: сотрудник " + employee.getFullName()
+                        + " уже под управлением этого директора!");
+                return;
+            }
+        }
         if (count >= subordinates.length) {
             System.out.println("Ошибка: массив подчинённых заполнен!");
             return;
         }
-
         subordinates[count] = employee;
         count++;
-
         System.out.println(employee.getFullName() + " добавлен(а) под управление директора "
                 + this.getFullName() + ". Всего подчинённых: " + count);
     }
@@ -41,14 +49,13 @@ public class Director extends Employee {
     public double calculateSalary() {
         if (position == null) return 0;
         double baseSalary = BASE_RATE * position.getCoefficient() * (1 + experience * 0.1);
-        double bonusForWorkers = 1 + count * 0.05;  // используем count, а не subordinates.length
+        double bonusForWorkers = 1 + count * 0.05;
         return baseSalary * bonusForWorkers;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
         sb.append("========================================\n");
         sb.append("ДИРЕКТОР\n");
         sb.append("========================================\n");
@@ -67,16 +74,10 @@ public class Director extends Employee {
                 sb.append("  ").append(subordinates[i].toString()).append("\n");
             }
         }
-
         sb.append("========================================");
         return sb.toString();
     }
 
-    public Employee[] getSubordinates() {
-        return subordinates;
-    }
-
-    public int getCount() {
-        return count;
-    }
+    public Employee[] getSubordinates() { return subordinates; }
+    public int getCount() { return count; }
 }

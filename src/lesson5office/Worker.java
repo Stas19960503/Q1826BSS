@@ -3,7 +3,9 @@ package lesson5office;
 public class Worker extends Employee {
 
     public Worker(String firstName, String lastName, int experience) {
+        
         super(firstName, lastName, experience);
+        setPosition(Position.WORKER);   // ← автоматически устанавливаем должность
     }
 
     @Override
