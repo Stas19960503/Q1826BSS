@@ -1,6 +1,6 @@
 package lesson5office;
 
-public class Director extends Employee {
+public class Director extends Employee implements Searchable {
 
     private final Employee[] subordinates = new Employee[100];
     private int count = 0;
@@ -43,6 +43,21 @@ public class Director extends Employee {
         count++;
         System.out.println(employee.getFullName() + " добавлен(а) под управление директора "
                 + this.getFullName() + ". Всего подчинённых: " + count);
+    }
+
+    @Override
+    public void findEmployeeByName(Director director, String name) {
+        for (int i = 0; i < director.getCount(); i++) {
+            Employee emp = director.getSubordinates()[i];
+
+            if (emp.getFullName().equalsIgnoreCase(name.trim())) {
+                System.out.println("Сотрудник \"" + emp.getFullName()
+                        + "\" найден в подчинении у директора " + director.getFullName() + ".");
+                return;
+            }
+        }
+        System.out.println("Сотрудник \"" + name + "\" не найден в подчинении у директора "
+                + director.getFullName() + ".");
     }
 
     @Override

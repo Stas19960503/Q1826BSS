@@ -82,6 +82,23 @@ public class EmployeeDemo {
         System.out.println("\n--- ТЕСТ 6.3: secondDirector добавляет главного директора ---");
         secondDirector.addWorker(mainDirector);
 
+        System.out.println("\n========== ПОИСК СОТРУДНИКОВ ==========");
+
+        System.out.println("\n--- ПОИСК 1: Иван Петров у Ольги Смирновой ---");
+        ((Director) mainDirector).findEmployeeByName((Director) mainDirector, "Иван Петров");
+
+        System.out.println("\n--- ПОИСК 2: Алексей Кузнецов у Ольги Смирновой ---");
+        ((Director) mainDirector).findEmployeeByName((Director) mainDirector, "Алексей Кузнецов");
+
+        System.out.println("\n--- ПОИСК 3: Алексей Кузнецов у Сергея Волкова ---");
+        ((Director) mainDirector).findEmployeeByName((Director) secondDirector, "Алексей Кузнецов");
+
+        System.out.println("\n--- ПОИСК 4: Неизвестный Сотрудник ---");
+        ((Director) mainDirector).findEmployeeByName((Director) mainDirector, "Неизвестный Сотрудник");
+
+        System.out.println("\n--- ПОИСК 5: иван петров (нижний регистр) ---");
+        ((Director) mainDirector).findEmployeeByName((Director) mainDirector, "иван петров");
+
         System.out.println("\n========== ИТОГОВЫЙ ОТЧЁТ ==========");
         System.out.println(mainDirector);
 
